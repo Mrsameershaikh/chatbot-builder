@@ -1,6 +1,15 @@
 import { Box, Button } from '@chakra-ui/react'
 import React from 'react';
 import styles from "./Dashboard.module.css";
+import ReactFlow from 'reactflow';
+import 'reactflow/dist/style.css';
+
+const initialNodes = [
+  { id: '1', position: { x: 0, y: 0 }, data: { label: '1' } },
+  { id: '2', position: { x: 0, y: 100 }, data: { label: '2' } },
+];
+const initialEdges = [{ id: 'e1-2', source: '1', target: '2' }];
+ 
 
 const Dashboard = () => {
   return (
@@ -13,6 +22,7 @@ const Dashboard = () => {
           {/* left section which shows the nodes */}
           <Box w='80%' h='100%' borderRight='1px solid gray' p={4}>
               nodes will display here
+              <ReactFlow nodes={initialNodes} edges={initialEdges} />
           </Box>
 
           {/* right section which has node setting */}
