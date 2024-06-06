@@ -1,0 +1,11 @@
+.navbarContainer{
+    background: gray;
+    align-content: center;
+    padding-right: 130px;
+}
+
+.taskSection{
+    display: flex;
+    align-items: center;
+    padding: 0px 4px;
+}
