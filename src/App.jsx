@@ -1,9 +1,20 @@
+import {
+  Route,
+  BrowserRouter as Router,
+  Routes,
+} from "react-router-dom";
+import WelcomePage from "./pages/WelcomePage/WelcomePage";
+import Dashboard from "./pages/Dashboard/Dashboard";
+
 function App() {
 
   return (
-    <>
-     <h1>Chatbot builder</h1>
-    </>
+    <Router>
+      <Routes>
+        <Route path="/" element={<WelcomePage />} />
+        <Route path="/chatbot-dashboard" element={<Dashboard />} />
+      </Routes>
+    </Router>
   )
 }
 
