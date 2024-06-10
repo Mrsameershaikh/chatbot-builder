@@ -9,7 +9,7 @@ const handleStyle = { width:'13px', height:'13px',background:'gray',border:'2px 
 //this is custom component
 
 const TextNode = ({ data }) => {
-  const { amount } = data;
+  const { text } = data;
   return (
     <>
       <Handle type="target" position={Position.Right} style={{...handleStyle, right:-8}}/> {/*handler or source or destination will be added with the help of Handler*/}
@@ -56,6 +56,8 @@ const TextNode = ({ data }) => {
               placeholder="type message..."
               h="50px"
               p={4}
+              value={text}
+              readOnly
             />
           </Box>
         </Box>

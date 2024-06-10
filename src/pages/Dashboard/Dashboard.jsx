@@ -11,6 +11,7 @@ import "reactflow/dist/style.css";
 import { initialNodes, initialEdges } from "./NodesEdges";
 import TextNode from "../../Components/TextNode";
 import Sidebar from "../../Components/Sidebar";
+import EditNode from "../../Components/EditNode";
 
 
 //here we can declare the types of nodes"text/video/imgetc
@@ -26,6 +27,39 @@ const Dashboard = () => {
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes); //this hook is used for nodes
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges); // this hook is used for edges/handles
   const [reactFlowInstance, setReactFlowInstance] = useState(null);
+  
+  //edit/update hooks
+  const [isEditing, setIsEditing] = useState(false);
+  const [editValue, setEditValue] = useState(nodes.data);
+  const [id, setId] = useState();
+
+  //function for edit the node text
+  const onNodeClick = (e, val) =>{
+    setEditValue(val?.data?.text);
+    setId(val.id);
+    setIsEditing(true);
+  }
+
+  //handle change function
+  const handleChange = (e) =>{
+    e.preventDefault();
+    setEditValue(e.target.value);
+    }
+
+  const handleEdit = () =>{
+    const res = nodes.map((item)=>{
+      if(item.id === id){
+        item.data={
+          ...item.data,
+          text:editValue
+        }
+      }
+      return item
+    })
+    setNodes(res);
+    setEditValue('');
+    setIsEditing(false);
+  }
 
   /*useCallback is a React hook that memoizes a function, 
   preventing it from being recreated on each render unless its dependencies change.
@@ -81,13 +115,13 @@ const Dashboard = () => {
     <ReactFlowProvider>
     <Box bg="white" w="100%" h="100vh" overflow={"hidden"}>
       <Box as="nav" w="100%" h={12} className={styles.navbarContainer}>
-        <Button float="right" h={8} border="1px solid gray">
+        <Button float="right" h={8} border="1px solid gray" onClick={handleEdit}>
           Save Changes
         </Button>
       </Box>
       <Box w="100%" h="100%" className={styles.taskSection}>
         {/* left section which shows the nodes */}
-        <Box w="80%" h="100%" borderRight="1px solid gray" p={4}>
+        <Box w="75%" h="100%" borderRight="1px solid gray" p={4}>
           <ReactFlow
             nodes={nodes}
             edges={edges}
@@ -98,12 +132,13 @@ const Dashboard = () => {
             onInit={setReactFlowInstance}
             onDrop={onDrop}
             onDragOver={onDragOver}
+            onNodeClick={(e, val)=> onNodeClick(e, val)}
           />
         </Box>
 
         {/* right section which has node setting */}
-        <Box w="20%" h="100%" p={4}>
-          <Sidebar />
+        <Box w="25%" h="100%" p={isEditing ? 0 : 4}>
+          {isEditing ? <EditNode value={editValue} onChange={handleChange} setIsEditing={setIsEditing} nodeId={id} setNodes={setNodes}/> :  <Sidebar />}
         </Box>
       </Box>
     </Box>

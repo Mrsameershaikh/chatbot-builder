@@ -6,9 +6,15 @@ export const initialNodes = [
     {
         id:"1",
         position:{x:100, y:100},
-        data:{amount: 10},
+        data:{text: ''},
         type:"textNode"
-    }
+    },
+    {
+      id:"2",
+      position:{x:200, y:200},
+      data:{text: ''},
+      type:"textNode"
+  }
   ];
 
 export const initialEdges = [];
