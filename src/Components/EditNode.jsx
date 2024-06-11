@@ -2,13 +2,8 @@ import { Box, Button, Flex, Text, Textarea } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { IoMdArrowBack } from "react-icons/io";
 import { MdDelete } from "react-icons/md";
-import ToasterNotification from "../helpers/ToasterNotification";
 
 const EditNode = ({ value, onChange, setIsEditing, nodeId, setNodes, nodes }) => {
-
-  const [showToast, setShowToast] = useState(false);
-  const [message, setMessage] = useState('');
-  const [type, setType] = useState('');
 
   const confirmDeleteNode = () => {
     const isConfirmed = window.confirm("Are you sure you want to delete?");
@@ -17,9 +12,7 @@ const EditNode = ({ value, onChange, setIsEditing, nodeId, setNodes, nodes }) =>
       setNodes((prevNodes) => prevNodes.filter((node) => node.id !== nodeId));
       setIsEditing(false);
     } else {
-      setMessage("Deletion cancelled!!");
-      setType('success');
-      setShowToast(true);
+      console.log("deletion cancelled!")
     }
   };
 
@@ -86,12 +79,6 @@ const EditNode = ({ value, onChange, setIsEditing, nodeId, setNodes, nodes }) =>
           />
         </Flex>
       </Box>
-      <ToasterNotification
-        showToast={showToast}
-        message={message}
-        type={type}
-        setShowToast={setShowToast}
-      />
     </>
   );
 };

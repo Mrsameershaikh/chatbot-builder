@@ -4,7 +4,13 @@ import { BiMessageRoundedDetail } from "react-icons/bi";
 import { PiWhatsappLogoDuotone } from "react-icons/pi";
 import { Handle, Position } from "reactflow";
 
-const handleStyle = { width:'13px', height:'13px',background:'gray',border:'2px solid white', zindex:100};
+const handleStyle = {
+  width: "13px",
+  height: "13px",
+  background: "gray",
+  border: "2px solid white",
+  zindex: 100,
+};
 
 //this is custom component
 
@@ -12,7 +18,12 @@ const TextNode = ({ data }) => {
   const { text } = data;
   return (
     <>
-      <Handle type="target" position={Position.Right} style={{...handleStyle, right:-8}}/> {/*handler or source or destination will be added with the help of Handler*/}
+      <Handle
+        type="target"
+        position={Position.Right}
+        style={{ ...handleStyle, right: -8 }}
+      />{" "}
+      {/*handler or source or destination will be added with the help of Handler*/}
       <Box
         maxW={{ base: "330px", md: "100%" }}
         minW={{ base: "250px", md: "250px" }}
@@ -49,10 +60,11 @@ const TextNode = ({ data }) => {
           {/* Input Section */}
           <Box>
             <Input
+              type="text"
               borderRadius="unset"
               focusBorderColor="transparent"
               focusborderwidth={0}
-              border='none'
+              border="none"
               placeholder="type message..."
               h="50px"
               p={4}
@@ -62,7 +74,12 @@ const TextNode = ({ data }) => {
           </Box>
         </Box>
       </Box>
-      <Handle type="source" position={Position.Left} id="a" style={{...handleStyle, left:-8}}/>
+      <Handle
+        type="source"
+        position={Position.Left}
+        id="a"
+        style={{ ...handleStyle, left: -8 }}
+      />
     </>
   );
 };
