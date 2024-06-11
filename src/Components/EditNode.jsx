@@ -1,9 +1,15 @@
 import { Box, Button, Flex, Text, Textarea } from "@chakra-ui/react";
-import React from "react";
+import React, { useState } from "react";
 import { IoMdArrowBack } from "react-icons/io";
 import { MdDelete } from "react-icons/md";
+import ToasterNotification from "../helpers/ToasterNotification";
 
-const EditNode = ({ value, onChange, setIsEditing, nodeId, setNodes }) => {
+const EditNode = ({ value, onChange, setIsEditing, nodeId, setNodes, nodes }) => {
+
+  const [showToast, setShowToast] = useState(false);
+  const [message, setMessage] = useState('');
+  const [type, setType] = useState('');
+
   const confirmDeleteNode = () => {
     const isConfirmed = window.confirm("Are you sure you want to delete?");
     if (isConfirmed) {
@@ -11,10 +17,24 @@ const EditNode = ({ value, onChange, setIsEditing, nodeId, setNodes }) => {
       setNodes((prevNodes) => prevNodes.filter((node) => node.id !== nodeId));
       setIsEditing(false);
     } else {
-      // Do nothing
-      console.log("Deletion canceled");
+      setMessage("Deletion cancelled!!");
+      setType('success');
+      setShowToast(true);
     }
   };
+
+  //when node selected the selecte value become true inside node object. need to set back to false if we exit edit mode because no nodes are selected.
+  const handleClose = () => {
+    const updatedItems = nodes.map(item => {
+      if (item.id == nodeId) {
+        return { ...item, selected: false }
+        }
+        return item;
+        });
+        setNodes(updatedItems);
+        setIsEditing(false);
+  };
+
   return (
     <>
       <Box
@@ -27,7 +47,7 @@ const EditNode = ({ value, onChange, setIsEditing, nodeId, setNodes }) => {
       >
         <IoMdArrowBack
           size={20}
-          onClick={() => setIsEditing(false)}
+          onClick={()=>handleClose()}
           cursor="pointer"
         />
         <Text margin="auto" fontWeight={500}>
@@ -66,6 +86,12 @@ const EditNode = ({ value, onChange, setIsEditing, nodeId, setNodes }) => {
           />
         </Flex>
       </Box>
+      <ToasterNotification
+        showToast={showToast}
+        message={message}
+        type={type}
+        setShowToast={setShowToast}
+      />
     </>
   );
 };

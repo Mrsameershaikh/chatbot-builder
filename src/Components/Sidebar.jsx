@@ -21,7 +21,7 @@ const Sidebar = () => {
       flexDirection="column"
       justifyContent="center"
       cursor="pointer"
-      onDragStart={(event) => onDragStart(event, "textNode")}
+      onDragStart={(event) => onDragStart(event, "textNode")}   //the second argument is custom node type.
       draggable
     >
       <BiMessageRoundedDetail size={40} color="#7677B0" />

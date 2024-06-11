@@ -14,8 +14,8 @@ const TextNode = ({ data }) => {
     <>
       <Handle type="target" position={Position.Right} style={{...handleStyle, right:-8}}/> {/*handler or source or destination will be added with the help of Handler*/}
       <Box
-        maxW={{ base: "350px", md: "100%" }}
-        minW={{ base: "300px", md: "300px" }}
+        maxW={{ base: "330px", md: "100%" }}
+        minW={{ base: "250px", md: "250px" }}
         boxShadow="0 0 20px rgba(0, 0, 0, 0.2)"
       >
         <Box d="flex" flexDirection="column">
@@ -51,7 +51,7 @@ const TextNode = ({ data }) => {
             <Input
               borderRadius="unset"
               focusBorderColor="transparent"
-              focusBorderWidth={0}
+              focusborderwidth={0}
               border='none'
               placeholder="type message..."
               h="50px"
