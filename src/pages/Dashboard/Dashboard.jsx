@@ -32,6 +32,7 @@ const Dashboard = () => {
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes); //this hook is used for nodes
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges); // this hook is used for edges/handles
   const [reactFlowInstance, setReactFlowInstance] = useState(null);
+ 
 
   //below states are for notification/toaster
   const [showToast, setShowToast] = useState(false);
@@ -42,6 +43,7 @@ const Dashboard = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [editValue, setEditValue] = useState(nodes.data);
   const [id, setId] = useState(null);
+  const [isTextNode, setIsTextNode] = useState(false);
 
   //delete edge states
   const [edgeId, setEdgeId] = useState(null);
@@ -50,10 +52,11 @@ const Dashboard = () => {
   //function for edit the node text
   const onNodeClick = (e, val) => {
     setEditValue(val?.data?.text);
-    setId(val.id);
-    if (val.type !== "imageNode") {
-      setIsEditing(true);
+    if(val?.type !== "textNode"){
+      setIsTextNode(true);    //if node is not text the edit mode will open but textarea will be hiden in EditNode
     }
+    setId(val.id);
+    setIsEditing(true);
   };
 
   //handle change function
@@ -77,6 +80,7 @@ const Dashboard = () => {
       setNodes(res); //updated response is added to node state.
       setEditValue(""); //after update task empty the edit value
       setIsEditing(false); // setting value to false in order to close the edit panel.
+      setIsTextNode(false);
       setMessage("Flow changes updated successfully");
       setType("success");
       setShowToast(true);
@@ -197,6 +201,8 @@ const Dashboard = () => {
                 nodeId={id}
                 setNodes={setNodes}
                 nodes={nodes}
+                isTextNode={isTextNode}
+                setIsTextNode={setIsTextNode}
               />
             ) : (
               <Sidebar />

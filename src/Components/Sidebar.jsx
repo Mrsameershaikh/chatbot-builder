@@ -53,6 +53,7 @@ const Sidebar = () => {
           Image
         </Text>
       </Box>
+      
     </>
   );
 };

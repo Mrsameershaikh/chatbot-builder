@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { IoMdArrowBack } from "react-icons/io";
 import { MdDelete } from "react-icons/md";
 
-const EditNode = ({ value, onChange, setIsEditing, nodeId, setNodes, nodes }) => {
+const EditNode = ({ value, onChange, setIsEditing, nodeId, setNodes, nodes, isTextNode, setIsTextNode }) => {
 
   const confirmDeleteNode = () => {
     const isConfirmed = window.confirm("Are you sure you want to delete?");
@@ -11,6 +11,7 @@ const EditNode = ({ value, onChange, setIsEditing, nodeId, setNodes, nodes }) =>
       // Delete logic
       setNodes((prevNodes) => prevNodes.filter((node) => node.id !== nodeId));
       setIsEditing(false);
+      setIsTextNode(false);
     } else {
       console.log("deletion cancelled!")
     }
@@ -21,11 +22,12 @@ const EditNode = ({ value, onChange, setIsEditing, nodeId, setNodes, nodes }) =>
     const updatedItems = nodes.map(item => {
       if (item.id == nodeId) {
         return { ...item, selected: false }
-        }
-        return item;
-        });
-        setNodes(updatedItems);
-        setIsEditing(false);
+      }
+      return item;
+    });
+    setNodes(updatedItems);
+    setIsEditing(false);
+    setIsTextNode(false);
   };
 
   return (
@@ -40,7 +42,7 @@ const EditNode = ({ value, onChange, setIsEditing, nodeId, setNodes, nodes }) =>
       >
         <IoMdArrowBack
           size={20}
-          onClick={()=>handleClose()}
+          onClick={() => handleClose()}
           cursor="pointer"
         />
         <Text margin="auto" fontWeight={500}>
@@ -64,12 +66,15 @@ const EditNode = ({ value, onChange, setIsEditing, nodeId, setNodes, nodes }) =>
               justifyContent: "space-between",
             }}
           >
+            {!isTextNode &&
             <Text color="gray" fontWeight={500}>
               Text
             </Text>
+            }
             <MdDelete size={25} cursor="pointer" onClick={confirmDeleteNode} />
           </div>
 
+          {!isTextNode && 
           <Textarea
             cols={40}
             paddingBottom={20}
@@ -77,6 +82,7 @@ const EditNode = ({ value, onChange, setIsEditing, nodeId, setNodes, nodes }) =>
             value={value}
             onChange={onChange}
           />
+          }
         </Flex>
       </Box>
     </>
