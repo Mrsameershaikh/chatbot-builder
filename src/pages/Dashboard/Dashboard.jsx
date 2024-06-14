@@ -124,19 +124,20 @@ const Dashboard = () => {
     (event) => {
       event.preventDefault();
 
-      const type = event.dataTransfer.getData("application/reactflow");
+      const type = event.dataTransfer.getData("application/reactflow"); //retrieving node type
 
       // check if the dropped element is valid
       if (typeof type === "undefined" || !type) {
         return;
       }
-      // reactFlowInstance.project was renamed to reactFlowInstance.screenToFlowPosition
-      // and you don't need to subtract the reactFlowBounds.left/top anymore
-      // details: https://reactflow.dev/whats-new/2023-11-10
+      
+      //fetching the position to drop the nodes where user require
       const position = reactFlowInstance.screenToFlowPosition({
         x: event.clientX,
         y: event.clientY,
       });
+
+      //creating new node object, this new node has no data at present
       const newNode = {
         id: getId(),
         type,
