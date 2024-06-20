@@ -11,7 +11,7 @@ const ToasterNotification = ({ showToast, message="test notification", type, set
         case 'success':
           toast.success(message, {
             position: "top-center",
-            autoClose: 5000,
+            autoClose: 3000,
             hideProgressBar: false,
             closeOnClick:setShowToast(false),
             pauseOnHover: true,
@@ -24,7 +24,7 @@ const ToasterNotification = ({ showToast, message="test notification", type, set
         case 'error':
           toast.error(message, {
             position: "top-center",
-            autoClose: 5000,
+            autoClose: 3000,
             hideProgressBar: false,
             closeOnClick: setShowToast(false),
             pauseOnHover: true,
@@ -38,7 +38,7 @@ const ToasterNotification = ({ showToast, message="test notification", type, set
         default:
           toast(message, {
             position: "top-right",
-            autoClose: 5000,
+            autoClose: 3000,
             hideProgressBar: false,
             closeOnClick: setShowToast(false),
             pauseOnHover: true,

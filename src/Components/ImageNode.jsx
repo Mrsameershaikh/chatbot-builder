@@ -14,13 +14,12 @@ const handleStyle = {
 
 //this is custom component
 
-const ImageNode = ({ data }) => {
+const ImageNode = () => {
   const [file, setFile] = useState();
     function handleChange(e) {
         console.log(e.target.files);
         setFile(URL.createObjectURL(e.target.files[0]));
     }
-
   return (
     <>
       <Handle
@@ -75,7 +74,7 @@ const ImageNode = ({ data }) => {
               p={4}
               onChange={handleChange}
             />
-            <Image src={file} style={{maxWidth:'200px', width:'100%', objectFit:'contain', margin:'auto'}}/>
+            <Image src={file} style={{maxWidth:'200px', width:'100%',padding:"5px 2px", objectFit:'contain', margin:'auto'}}/>
           </Box>
         </Box>
       </Box>
